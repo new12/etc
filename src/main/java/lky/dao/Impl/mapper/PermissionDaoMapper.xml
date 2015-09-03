@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lky.dao.Impl">
+	<resultMap type="lky.entity.Permission" id="permissionResultMap">
+		<id property="id" column="id" />
+		<result property="permission" column="permission"/>
+		<result property="description" column="description"/>
+		<result property="name" column="name"/>
+		<result property="available" column="available"/>
+	</resultMap>
+	<insert id="createPermission" parameterType="lky.entity.Permission">
+		insert into sys_permissions (permission,description,available,name )
+		 values(#{permission},#{description},#{available},#{name})
+	</insert>
+	
+	<delete id="deletePermission"  parameterType="long" >
+	    delete from sys_permissions where id = #{id}
+	</delete>
+
+	<select id="selectPermissions" resultMap="permissionResultMap">
+		select id,name,permission,description,available from sys_permissions order by id
+	</select>
+	
+</mapper>
